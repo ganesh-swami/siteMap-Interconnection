@@ -22,29 +22,27 @@ export async function GET(request){
 export async function POST(request){
     try {
         await dbConnect()
-        // logger.info('@googleLogin1111111')
     const reqBody = await request.json()
     const {authCode} = reqBody;
-    let redirectURI= 'https://siteMapTopical.com'; 
+    let redirectURI= 'https://examplesiteMapInterconnectiongen.io'; 
     if(process.env.NEXT_PUBLIC_ENVIRONMENT==='LOCAL'){
         redirectURI ='http://localhost:3001'
     }
     else if(process.env.NEXT_PUBLIC_ENVIRONMENT==='DEV'){
-        redirectURI ='https://siteMapTopical.com/dev/'
+        redirectURI ='https://examplesiteMapInterconnectiongen.io/dev/'
     }
     else if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'LIVE') {
-        redirectURI ='https://siteMapTopical.com/'
+        redirectURI ='https://examplesiteMapInterconnectiongen.io/'
     }
 
-    // logger.info('@googleLoginredirectURI',redirectURI);
+    
     
     const oAuth2Client = new OAuth2Client(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,process.env.GOOGLE_SECRET,redirectURI);
     const { tokens } = await oAuth2Client.getToken(authCode); // exchange code for tokens
-    // logger.info('@googleLogintokens ---- ',tokens);
+    
 
     const {id_token} = tokens;
     const { name, email } = parseJwt(id_token)
-    logger.info('@googleLoginname, email ---- ',name, email);
         
 
         // upsert is true, this option enables mongoose to create a new entry if there is no existing record matching the filter

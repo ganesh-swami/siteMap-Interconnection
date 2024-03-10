@@ -62,9 +62,9 @@ export default function JwtLoginView() {
     formState: { isSubmitting },
   } = methods;
 
-  let redirect_uri= 'https://siteMapTopical.com';
+  let redirect_uri= 'https://examplesiteMapInterconnectiongen.io';
   if(process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEV'){
-    redirect_uri= 'https://siteMapTopical.com/dev';
+    redirect_uri= 'https://examplesiteMapInterconnectiongen.io/dev';
   }
   else if(process.env.NEXT_PUBLIC_ENVIRONMENT === 'LOCAL'){
     redirect_uri= 'http://localhost:3001/';
@@ -82,7 +82,7 @@ export default function JwtLoginView() {
   });
 
   const googleLogin = useGoogleLogin({
-    redirect_uri:process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEV' ? 'https://siteMapTopical.com/dev/':'http://localhost:3001/',
+    redirect_uri:process.env.NEXT_PUBLIC_ENVIRONMENT === 'DEV' ? 'https://examplesiteMapInterconnectiongen.io/dev/':'http://localhost:3001/',
     onSuccess: async ({ code }) => {
       try {
         console.log(code);
