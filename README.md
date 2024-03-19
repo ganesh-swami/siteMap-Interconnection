@@ -4,9 +4,10 @@
 
 
 ## System Requirement
-- NodeJs > 16.0
+- NodeJs > 18.0
 - NPM
 - PM2
+- ReactJs >=18
 
 ## Other Requirement
 If you would like to contribute or customize this project you should know below technology stack
