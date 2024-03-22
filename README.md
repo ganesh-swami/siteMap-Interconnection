@@ -8,6 +8,8 @@
 - NPM
 - PM2
 - ReactJs >=18
+- Redux
+- axios
 
 ## Other Requirement
 If you would like to contribute or customize this project you should know below technology stack
