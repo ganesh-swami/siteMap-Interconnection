@@ -4,7 +4,7 @@ import logger from "src/utils/logger";
 import TopicalMap from 'src/modals/topicalMapModal';
 import { checkJWTAuth } from 'src/utils/middleware';
 import dbConnect from 'src/dbConfig/dbConfig';
-import User from 'src/modals/userModal'
+import User from 'src/modals/userModal';
 
 export async function POST(req, res) {
   try {
