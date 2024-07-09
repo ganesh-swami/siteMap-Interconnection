@@ -50,7 +50,6 @@ const getLayoutedElements = (Nodes, Edges, leve2TotalNodeCount,leve3TotalNodeCou
     dagreGraph.setEdge(edge.source, edge.target);
   });
 
-  // console.log('@@ pppppppppppp ', dagreGraph.node('1003A'));
 
   dagre.layout(dagreGraph);
   let decreaseXPosition=20; // just starting
@@ -94,34 +93,20 @@ const getLayoutedElements = (Nodes, Edges, leve2TotalNodeCount,leve3TotalNodeCou
     else if(node?.data?.level===3){
       // just to put nodes little up and down so edges can be seen easily if multiple adges are going from same path
       const deviation = (level3Index % 3) * deviationMultiplier;
-      // now try to decrease the distance of nodes
-      // if(leve3TotalNodeCount>6 && deviation>0){
-      //   // out of 3 , 2 will not be in same line so decrease it accordingly
-      //   decreaseXPosition+=200;
-        
-      // }
-      // else{
-      //   decreaseXPosition+=20; // just a number to decrease the space for every remaining case
-      // }
+      
 
       // center node position change 
       const mainNodeWithPosition = dagreGraph.node(Nodes[0].id);
       const changeInMainNode = mainNodeWithPosition.x - ((leve2MaxX-leve2MinX)/2 + leve2MinX)
-      // debugger;
-      // console.log('changeInMainNode',changeInMainNode);
       decreaseXPosition = (level3Index+1 )* (changeInMainNode/leve3TotalNodeCount);
 
-      // debugger;
 
       nodePostionY=(nodeWithPosition.y - nodeHeight / 2) + deviation;
       nodePostionX = nodeWithPosition.x - Math.abs(decreaseXPosition);
       nodePostionY += (deviationMultiplier * 3);
       level3Index+=1;
     }
-    // else {
-    //   nodePostionX = nodeWithPosition.x + nodeWidth / 2 - ((leve2TotalNodeCount/3)-1)*nodeWidth; 
-    //   nodePostionY = nodeWithPosition.y - nodeHeight / 2; 
-    // }
+    
     
     
 
@@ -211,15 +196,7 @@ const FlowChart = ({
         if ((alreadyExistEdgeId || alreadyExistEdgeId === 0) && alreadyExistEdgeId >= 0) {
 
           const color = EDGE_COLOR;
-          // if(false && edgeProps.targetNodeLevel === edgeProps.sourceNodeLevel){
-          //   const edgelength=Math.abs(sourceNodePosition.x - targetNodePosition.x);
-          //   if(edgelength>750){
-          //     color='#593516';
-          //   }
-          //   else if(edgelength<=750 && edgelength>350) {
-          //     color='#08fcec';
-          //   }
-          // }
+          
           
           tmpedges[alreadyExistEdgeId] = {
             ...tmpedges[alreadyExistEdgeId],
@@ -248,51 +225,7 @@ const FlowChart = ({
           const sourceNodeIndex = allNodes.findIndex((node) => node.id === edgeProps.sourceNodeId);
           const targetNodeIndex = allNodes.findIndex((node) => node.id === edgeProps.targetNodeId);
           
-          // if (false && sourceNodePosition.x < targetNodePosition.x) { // #593516
-          //   // it means source node is left to target node
-          //   // sourceNode should have source in right, target node should have target in left like  "TopLeftTargetNode"
-            
-          //   // for now update only if type is default
-          //   if (
-          //     (sourceNodeIndex || sourceNodeIndex === 0) &&
-          //     tmpNodes[sourceNodeIndex].type === 'DefaultNode'
-          //   ) {
-          //     tmpNodes[sourceNodeIndex] = {
-          //       ...tmpNodes[sourceNodeIndex],
-          //       type: 'TopLeftTargetNode',
-          //     };
-          //   }
-          //   if (
-          //     (targetNodeIndex || targetNodeIndex === 0) &&
-          //     tmpNodes[targetNodeIndex].type === 'DefaultNode'
-          //   ) {
-          //     tmpNodes[targetNodeIndex] = {
-          //       ...tmpNodes[targetNodeIndex],
-          //       type: 'TopLeftTargetNode',
-          //     };
-          //   }
-          // } else if(false) { // it means source node is right to target node
-          //   if (
-          //     (sourceNodeIndex || sourceNodeIndex === 0) &&
-          //     tmpNodes[sourceNodeIndex].type === 'DefaultNode'
-          //   ) {
-          //     tmpNodes[sourceNodeIndex] = {
-          //       ...tmpNodes[sourceNodeIndex],
-          //       type: 'TopRightTargetNode',
-          //     };
-          //   }
-          //   if (
-          //     (targetNodeIndex || targetNodeIndex === 0) &&
-          //     tmpNodes[targetNodeIndex].type === 'DefaultNode'
-          //   ) {
-          //     tmpNodes[targetNodeIndex] = {
-          //       ...tmpNodes[targetNodeIndex],
-          //       type: 'TopRightTargetNode',
-          //     };
-          //   }
-          // }
-
-
+          
           tmpNodes[sourceNodeIndex] = {
             ...tmpNodes[sourceNodeIndex],
             type: "MultiSrcAndTargetNode",
@@ -320,103 +253,21 @@ const FlowChart = ({
             zIndex:2
           };
 
-          // if(true){
-          //   console.log('just to avoid coloring')
-          // }
-          // else if (mainNodeId === edgeProps.targetNodeId) {
-          //   newEdge.markerEnd = {
-          //     type: MarkerType.Arrow,
-          //     color: '#ffc107',
-          //     orient: 10,
-          //   };
-          //   newEdge.style = {
-          //     strokeWidth: 2.2,
-          //     // stroke: '#ffc107',
-          //   };
-          //   newEdge.type = ConnectionLineType.SmoothStep;
-          // } else if (edgeProps.targetNodeLevel === edgeProps.sourceNodeLevel) {
-          //   newEdge.markerEnd = {
-          //     type: MarkerType.Arrow,
-          //     color: '#00aa41',
-          //   };
-          //   newEdge.style = {
-          //     strokeWidth: 1.7,
-          //     stroke: '#00aa41',
-          //   };
-          //   newEdge.animated = true;
-          //   // distance is little far then 
-          //   if(Math.abs(sourceNodePosition.x - targetNodePosition.x)>300){
-          //     newEdge.markerEnd.color='#593516';
-          //     newEdge.style.stroke= '#593516';
-          //     newEdge.animated = false;
-          //   }
-
-          // } else if (edgeProps.targetNodeLevel + 1 === edgeProps.sourceNodeLevel) {
-          //   // source to target
-          //   // #ffb34b
-
-          //   newEdge.markerEnd = {
-          //     type: MarkerType.Arrow,
-          //     color: '#ffb34b',
-          //   };
-          //   newEdge.style = {
-          //     strokeWidth: 1.5,
-          //     stroke: '#ffb34b',
-          //   };
-          //   // newEdge["animated"] = true;
-          // }
-          // else if (edgeProps.targetNodeLevel > edgeProps.sourceNodeLevel) {
-          //   // target to source
-          //   // #ffb34b
-
-          //   newEdge.markerEnd = {
-          //     type: MarkerType.Arrow,
-          //     color: '#2583f4',
-          //   };
-          //   newEdge.style = {
-          //     strokeWidth: 2.3,
-          //     stroke: '#2583f4',
-          //   };
-          //   // newEdge["animated"] = true;
-          // }
-          // else{
-          //   newEdge.markerEnd = {
-          //     type: MarkerType.Arrow,
-          //     color: '#bbb',
-          //   };
-          //   newEdge.style = {
-          //     strokeWidth: 1.5,
-          //     stroke: '#bbb',
-          //   };
-          // }
-
-          // console.log('new Edge == ', newEdge);
-          // console.log('new [...edges, newEdge] == ', [...Edges, newEdge]);
 
           tmpedges.push(newEdge);
-          // setEdges([...edges, newEdge]);
         }
       });
-      // console.log('$$$$$$$$$$$$$$$$$ tmpNodes', tmpNodes);
-      // console.log('$$$$$$$$$$$$$$$$$ allNodes', allNodes);
-      // console.log('$$$$$$$$$$$$$$$$$ tmpedges', tmpedges);
-      // console.log('$$$$$$$$$$$$$$$$$ allEdges', allEdges);
-      // debugger;
       setAllNodes((prevNodes) => 
-        // console.log("prevNodes *********************** ",prevNodes) 
          tmpNodes
       );
       setAllEdges(
         (prevEdges) => 
-          // console.log("prevEdges *********************** ",prevEdges) 
            tmpedges
         
       );
       setTimeout(() => {
         setFitView(true);
       }, 1000);
-      
-      console.log('---------------------------------------------------tmpedges ',tmpedges);
     }
   }, [nowRun]); // needToAddEdges,
   return (
@@ -442,7 +293,6 @@ const FlowChart = ({
           <DownloadButton topicaldata={topicaldata}/>
           <Background color="#ccc" variant="cross" />
         </ReactFlow>
-        {/* <CircularProgress /> */}
         </Box>
       )}
     </>
