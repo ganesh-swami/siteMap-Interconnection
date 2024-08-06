@@ -10,6 +10,7 @@
 - ReactJs >=18
 - Redux
 - axios
+- ReactFlow
 
 ## Other Requirement
 If you would like to contribute or customize this project you should know below technology stack
